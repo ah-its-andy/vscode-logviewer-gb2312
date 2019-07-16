@@ -1,0 +1,16 @@
+image: registry.gitlab.com/berublan/vscode-log-viewer
+
+cache:
+  paths:
+    - node_modules/    
+
+variables:
+  DISPLAY: ':99.0'
+
+test:
+  script:
+    - Xvfb -ac $DISPLAY &
+    - yarn install
+    - yarn run build
+    - mv /.vscode-test .    
+    - yarn run test

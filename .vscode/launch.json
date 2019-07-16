@@ -1,0 +1,76 @@
+// A launch configuration that compiles the extension and then opens it inside a new window
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch Extension",
+            "type": "extensionHost",
+            "request": "launch",
+            "runtimeExecutable": "${execPath}",
+            "args": [
+                "--disable-extensions",
+                "--extensionDevelopmentPath=${workspaceRoot}",
+                "/home/berni/Documentos/src/test/demo-logs",
+                //"/home/berni/Documentos/src/test/sample-logs",
+            ],
+            "windows": {
+                "args": [
+                    "--disable-extensions",
+                    "--extensionDevelopmentPath=${workspaceRoot}",
+                    "C:\\Users\\Bernardo\\Documents\\src\\misc\\egestiona-logs",
+                ]
+            },
+            "stopOnEntry": false,
+            "sourceMaps": true,
+            "preLaunchTask": "watch:webpack",
+        },
+        {
+            "name": "Launch Tests",
+            "type": "extensionHost",
+            "request": "launch",
+            "runtimeExecutable": "${execPath}",
+            "args": [
+                "--disable-extensions",
+                "--extensionDevelopmentPath=${workspaceRoot}",
+                "--extensionTestsPath=${workspaceRoot}/out/test"
+            ],
+            "stopOnEntry": false,
+            "sourceMaps": true,
+            "outFiles": [
+                "${workspaceFolder}/out/test/**/*.js"
+            ],
+            "preLaunchTask": "watch:tsc",
+        },
+        {
+            "name": "Launch vscodefree Tests",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
+            "args": [
+                "-u",
+                "tdd",
+                "--timeout",
+                "99999",
+                "--colors",
+                "${workspaceFolder}/out/test/requireMock.js",
+                "${workspaceFolder}/out/test/vscodefree/**/*.test.js"
+            ],
+            "stopOnEntry": false,
+            "sourceMaps": true,
+            "outFiles": [
+                "${workspaceFolder}/out/test/**/*.js"
+            ],
+            "preLaunchTask": "watch:tsc",
+            "internalConsoleOptions": "openOnSessionStart",
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch build/configuration",
+            "program": "${workspaceFolder}/out/build/configuration.js",
+            "outFiles": [
+                "${workspaceFolder}/out/build/**/*.js"
+            ],
+        }
+    ]
+}

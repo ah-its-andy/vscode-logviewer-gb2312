@@ -1,0 +1,55 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "clean",
+            "type": "shell",
+            "command": "rm",
+            "args": [
+                "-rf",
+                "./out",
+                "./dist"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "watch:tsc",
+            "type": "shell",
+            "command": "tsc",
+            "args": [
+                "-watch",
+                "-p",
+                "./"
+            ],
+            "isBackground": true,
+            "problemMatcher": [
+                "$tsc-watch"
+            ]
+        },
+        {
+            "label": "watch:webpack",
+            "type": "shell",
+            "command": "webpack",
+            "args": [
+                "--mode",
+                "none",
+                "--watch",
+            ],
+            "isBackground": true,
+            "problemMatcher": [],
+        },
+        {
+            "label": "watch",
+            "group": {
+                "isDefault": true,
+                "kind": "build"
+            },
+            "dependsOn": [
+                "watch:webpack",
+                "watch:tsc"
+            ],
+        }
+    ]
+}

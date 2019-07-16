@@ -1,0 +1,74 @@
+{
+    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+    "$comment": "based on https://github.com/emilast/vscode-logfile-highlighter",
+    "name": "Log file",
+    "scopeName": "text.log.log-viewer",
+    "patterns": [
+        {
+            "comment": "DEBUG",
+            "match": "(?i)\\b(debug)\\b",
+            "name": "keyword"
+        },
+        {
+            "comment": "INFO",
+            "match": "(?i)\\b(info)\\b",
+            "name": "keyword"
+        },
+        {
+            "comment": "WARN",
+            "match": "(?i)\\b(warn|warning)\\b",
+            "name": "markup.changed"
+        },
+        {
+            "comment": "ERROR",
+            "match": "(?i)\\b(error|fatal)\\b",
+            "name": "invalid"
+        },
+        {
+            "comment": "ISO dates (2016-08-23)",
+            "match": "\\b\\d{4}-\\d{2}-\\d{2}",
+            "name": "constant.numeric"
+        },
+        {
+            "comment": "times",
+            "match": "(T|\\b)\\d{2}:\\d{2}:\\d{2}([,.]\\d+)?(\\+\\d{2}:\\d{2})?",
+            "name": "constant.numeric"
+        },
+        {
+            "comment": "Guids",
+            "disabled": 1,
+            "match": "[0-9a-fA-F]{8}[-]?([0-9a-fA-F]{4}[-]?){3}[0-9a-fA-F]{12}",
+            "name": "constant.language"
+        },
+        {
+            "comment": "Constants",
+            "match": "\\b([0-9]+|true|false|null)\\b",
+            "name": "constant.numeric"
+        },
+        {
+            "comment": "String constants",
+            "match": "\"[^\"]*\"",
+            "name": "string.quoted"
+        },
+        {
+            "match": "'[^']*'",
+            "name": "string.quoted"
+        },
+        {
+            "comment": "Exception type names",
+            "match": "\\b([a-zA-Z.]*Exception)\\b",
+            "name": "invalid"
+        },
+        {
+            "comment": "Colorize rows of exception call stacks",
+            "name": "string.regexp",
+            "begin": "^[\t ]*(at|en)",
+            "end": "$"
+        },
+        {
+            "comment": "Urls",
+            "match": "\\b(http|https|ftp|file)://\\S+\\b",
+            "name": "storage"
+        }
+    ]
+}

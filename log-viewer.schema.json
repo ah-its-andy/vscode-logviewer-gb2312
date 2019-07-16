@@ -1,0 +1,120 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "title": "Log Viewer Configuration",
+    "definitions": {
+        "watchOptions": {
+            "type": "object",
+            "properties": {
+                "fileCheckInterval": {
+                    "type": "number",
+                    "default": 500,
+                    "description": "Interval in ms to check for changes in current file."
+                },
+                "fileListInterval": {
+                    "type": "number",
+                    "default": 2000,
+                    "description": "Interval in ms to search for new files."
+                },
+                "ignorePattern": {
+                    "type": "string",
+                    "description": "This pattern is matched against each segment in the path. Each directory and the file.",
+                    "default": "(node_modules|.git)"
+                },
+                "encoding": {
+                    "type": "string",
+                    "description": "Encoding to use when reading the files. (https://nodejs.org/api/buffer.html#buffer_buffers_and_character_encodings).",
+                    "default": "utf8",
+                    "enum": [
+                        "utf8",
+                        "ascii",
+                        "ucs2",
+                        "utf16le",
+                        "latin1"
+                    ]
+                }
+            }
+        },
+        "watch": {
+            "oneOf": [
+                {
+                    "description": "Glob pattern.",
+                    "type": "string"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "title": {
+                            "description": "Text to use in the explorer view and for the tab name.",
+                            "type": "string"
+                        },
+                        "pattern": {
+                            "description": "Glob pattern.",
+                            "type": "string"
+                        },
+                        "workspaceName": {
+                            "description": "When in a multi-root workspace, which workspace should be used to resolve relative patterns.",
+                            "type": "string"
+                        },
+                        "options": {
+                            "description": "Options for this watch (overrides logViewer.options).",
+                            "$ref": "#/definitions/watchOptions"
+                        }
+                    },
+                    "required": [
+                        "pattern"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "description": "A group of watches.",
+                    "properties": {
+                        "groupName": {
+                            "description": "Name of the group.",
+                            "type": "string"
+                        },
+                        "watches": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/watch"
+                            }
+                        }
+                    },
+                    "required": [
+                        "groupName",
+                        "watches"
+                    ]
+                }
+            ]
+        }
+    },
+    "type": "object",
+    "properties": {
+        "logViewer.watch": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/watch"
+            },
+            "default": [],
+            "description": "Glob patterns of files to watch."
+        },
+        "logViewer.options": {
+            "description": "Global watch options.",
+            "$ref": "#/definitions/watchOptions"
+        },
+        "logViewer.windows.allowBackslashAsPathSeparator": {
+            "type": "boolean",
+            "default": true,
+            "description": "Allow to use \"\\\" (as well as \"/\") as a path separator on windows. Won't be able to escape certain pattern characters when enabled."
+        },
+        "logViewer.showStatusBarItemOnChange": {
+            "type": "boolean",
+            "default": false,
+            "description": "Show an item in the status bar when a watched pattern changes, to quickly access it."
+        },
+        "logViewer.chunkSizeKb": {
+            "type": "number",
+            "default": 64,
+            "description": "Chunk size in kilobytes used to calculate the size of the last chunk to load in the viewer. The loaded last chunk will always be less than 2 * chunkSizeKb."
+        }
+    }
+}

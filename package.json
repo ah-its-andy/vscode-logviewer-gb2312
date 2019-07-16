@@ -1,0 +1,338 @@
+{
+    "name": "vscode-log-viewer",
+    "displayName": "Log Viewer",
+    "description": "Monitors text log files",
+    "version": "0.9.0",
+    "publisher": "berublan",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://gitlab.com/berublan/vscode-log-viewer"
+    },
+    "engines": {
+        "vscode": "^1.36.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "keywords": [
+        "logging",
+        "log viewer",
+        "log monitor",
+        "tail"
+    ],
+    "icon": "images/logo.png",
+    "activationEvents": [
+        "onView:logExplorer"
+    ],
+    "main": "./dist/extension",
+    "contributes": {
+        "views": {
+            "log-viewer": [
+                {
+                    "id": "logExplorer",
+                    "name": "Watches"
+                }
+            ]
+        },
+        "menus": {
+            "view/title": [
+                {
+                    "command": "logviewer.unwatchAll",
+                    "when": "view == logExplorer",
+                    "group": "navigation"
+                }
+            ],
+            "view/item/context": [
+                {
+                    "command": "logviewer.unwatchLogResource",
+                    "when": "viewItem == watching"
+                }
+            ]
+        },
+        "viewsContainers": {
+            "activitybar": [
+                {
+                    "id": "log-viewer",
+                    "title": "Log Viewer",
+                    "icon": "images/baseline-broken_image-24px.svg"
+                }
+            ]
+        },
+        "commands": [
+            {
+                "command": "logviewer.toggleFollowTail",
+                "title": "Toggle follow tail"
+            },
+            {
+                "command": "logviewer.clearLogView",
+                "title": "Clear log view"
+            },
+            {
+                "command": "logviewer.resetLogView",
+                "title": "Reset log view"
+            },
+            {
+                "command": "logviewer.unwatchAll",
+                "title": "Unwatch all"
+            },
+            {
+                "command": "logviewer.unwatchLogResource",
+                "title": "Stop watching"
+            },
+            {
+                "command": "logviewer.openCurrentFile",
+                "title": "Open current log file"
+            },
+            {
+                "command": "logviewer.openLastChanged",
+                "title": "Open the last changed watch"
+            }
+        ],
+        "configuration": {
+            "title": "Log Viewer Configuration",
+            "type": "object",
+            "properties": {
+                "logViewer.watch": {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "description": "Glob pattern.",
+                                "type": "string"
+                            },
+                            {
+                                "type": "object",
+                                "properties": {
+                                    "title": {
+                                        "description": "Text to use in the explorer view and for the tab name.",
+                                        "type": "string"
+                                    },
+                                    "pattern": {
+                                        "description": "Glob pattern.",
+                                        "type": "string"
+                                    },
+                                    "workspaceName": {
+                                        "description": "When in a multi-root workspace, which workspace should be used to resolve relative patterns.",
+                                        "type": "string"
+                                    },
+                                    "options": {
+                                        "description": "Options for this watch (overrides logViewer.options).",
+                                        "type": "object",
+                                        "properties": {
+                                            "fileCheckInterval": {
+                                                "type": "number",
+                                                "default": 500,
+                                                "description": "Interval in ms to check for changes in current file."
+                                            },
+                                            "fileListInterval": {
+                                                "type": "number",
+                                                "default": 2000,
+                                                "description": "Interval in ms to search for new files."
+                                            },
+                                            "ignorePattern": {
+                                                "type": "string",
+                                                "description": "This pattern is matched against each segment in the path. Each directory and the file.",
+                                                "default": "(node_modules|.git)"
+                                            },
+                                            "encoding": {
+                                                "type": "string",
+                                                "description": "Encoding to use when reading the files. (https://nodejs.org/api/buffer.html#buffer_buffers_and_character_encodings).",
+                                                "default": "utf8",
+                                                "enum": [
+                                                    "utf8",
+                                                    "ascii",
+                                                    "ucs2",
+                                                    "utf16le",
+                                                    "latin1"
+                                                ]
+                                            }
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "pattern"
+                                ]
+                            },
+                            {
+                                "type": "object",
+                                "description": "A group of watches.",
+                                "properties": {
+                                    "groupName": {
+                                        "description": "Name of the group.",
+                                        "type": "string"
+                                    },
+                                    "watches": {
+                                        "type": "array",
+                                        "items": {
+                                            "oneOf": [
+                                                {
+                                                    "description": "Glob pattern.",
+                                                    "type": "string"
+                                                },
+                                                {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "title": {
+                                                            "description": "Text to use in the explorer view and for the tab name.",
+                                                            "type": "string"
+                                                        },
+                                                        "pattern": {
+                                                            "description": "Glob pattern.",
+                                                            "type": "string"
+                                                        },
+                                                        "workspaceName": {
+                                                            "description": "When in a multi-root workspace, which workspace should be used to resolve relative patterns.",
+                                                            "type": "string"
+                                                        },
+                                                        "options": {
+                                                            "description": "Options for this watch (overrides logViewer.options).",
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "fileCheckInterval": {
+                                                                    "type": "number",
+                                                                    "default": 500,
+                                                                    "description": "Interval in ms to check for changes in current file."
+                                                                },
+                                                                "fileListInterval": {
+                                                                    "type": "number",
+                                                                    "default": 2000,
+                                                                    "description": "Interval in ms to search for new files."
+                                                                },
+                                                                "ignorePattern": {
+                                                                    "type": "string",
+                                                                    "description": "This pattern is matched against each segment in the path. Each directory and the file.",
+                                                                    "default": "(node_modules|.git)"
+                                                                },
+                                                                "encoding": {
+                                                                    "type": "string",
+                                                                    "description": "Encoding to use when reading the files. (https://nodejs.org/api/buffer.html#buffer_buffers_and_character_encodings).",
+                                                                    "default": "utf8",
+                                                                    "enum": [
+                                                                        "utf8",
+                                                                        "ascii",
+                                                                        "ucs2",
+                                                                        "utf16le",
+                                                                        "latin1"
+                                                                    ]
+                                                                }
+                                                            }
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "pattern"
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "groupName",
+                                    "watches"
+                                ]
+                            }
+                        ]
+                    },
+                    "default": [],
+                    "description": "Glob patterns of files to watch."
+                },
+                "logViewer.options": {
+                    "description": "Global watch options.",
+                    "type": "object",
+                    "properties": {
+                        "fileCheckInterval": {
+                            "type": "number",
+                            "default": 500,
+                            "description": "Interval in ms to check for changes in current file."
+                        },
+                        "fileListInterval": {
+                            "type": "number",
+                            "default": 2000,
+                            "description": "Interval in ms to search for new files."
+                        },
+                        "ignorePattern": {
+                            "type": "string",
+                            "description": "This pattern is matched against each segment in the path. Each directory and the file.",
+                            "default": "(node_modules|.git)"
+                        },
+                        "encoding": {
+                            "type": "string",
+                            "description": "Encoding to use when reading the files. (https://nodejs.org/api/buffer.html#buffer_buffers_and_character_encodings).",
+                            "default": "utf8",
+                            "enum": [
+                                "utf8",
+                                "ascii",
+                                "ucs2",
+                                "utf16le",
+                                "latin1"
+                            ]
+                        }
+                    }
+                },
+                "logViewer.windows.allowBackslashAsPathSeparator": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Allow to use \"\\\" (as well as \"/\") as a path separator on windows. Won't be able to escape certain pattern characters when enabled."
+                },
+                "logViewer.showStatusBarItemOnChange": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Show an item in the status bar when a watched pattern changes, to quickly access it."
+                },
+                "logViewer.chunkSizeKb": {
+                    "type": "number",
+                    "default": 64,
+                    "description": "Chunk size in kilobytes used to calculate the size of the last chunk to load in the viewer. The loaded last chunk will always be less than 2 * chunkSizeKb."
+                }
+            }
+        },
+        "languages": [
+            {
+                "id": "log-viewer",
+                "aliases": [
+                    "Log file"
+                ],
+                "extensions": [
+                    ".log-viewer"
+                ],
+                "mimetypes": [
+                    "log",
+                    "text/log",
+                    "text/x-log",
+                    "text/x-code-output",
+                    "x-code-output"
+                ]
+            }
+        ],
+        "grammars": [
+            {
+                "language": "log-viewer",
+                "scopeName": "text.log.log-viewer",
+                "path": "./syntaxes/log-syntax.json"
+            }
+        ]
+    },
+    "scripts": {
+        "vscode:prepublish": "rm -rf dist/ && webpack --mode production",
+        "build": "rm -rf dist/ out/ && tsc -p ./ && webpack --mode none",
+        "test": "node ./out/test/runTest.js",
+        "test:vscodefree": "mocha --ui tdd out/test/requireMock.js out/test/vscodefree/**/*.test.js"
+    },
+    "dependencies": {
+        "picomatch": "^2.0.5"
+    },
+    "devDependencies": {
+        "@types/mocha": "^5.2.7",
+        "@types/node": "10.*",
+        "@types/vscode": "^1.36.0",
+        "@types/webpack": "^4.4.34",
+        "fast-glob": "^3.0.3",
+        "mocha": "^6.1.4",
+        "ts-loader": "^6.0.4",
+        "typescript": "^3.5.2",
+        "vscode-test": "^1.0.0",
+        "webpack": "^4.35.2",
+        "webpack-cli": "^3.3.5"
+    }
+}
