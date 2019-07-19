@@ -9,8 +9,8 @@ then
     Xvfb -ac $DISPLAY &
 fi
 
-mkdir -p /builds/berublan/vscode-log-viewer
-cd /builds/berublan/vscode-log-viewer
+mkdir -p /builds/berublan/vscode-log-viewer-gb2312
+cd /builds/berublan/vscode-log-viewer-gb2312
 # copy to avoid modifying in source
 cp -r /mnt/src/. .
 if [ -d /.vscode-test ]

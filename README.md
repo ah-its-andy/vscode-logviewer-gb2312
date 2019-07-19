@@ -1,4 +1,4 @@
-# vscode-log-viewer README
+# vscode-log-viewer-gb2312 README
 
 Log file viewer.
 
@@ -58,6 +58,6 @@ Log file viewer.
 }
 ```
 
-![Screenshot](https://gitlab.com/berublan/vscode-log-viewer/raw/master/images/screenshot1.png)
+![Screenshot](https://gitlab.com/berublan/vscode-log-viewer-gb2312/raw/master/images/screenshot1.png)
 
-![Screenshot](https://gitlab.com/berublan/vscode-log-viewer/raw/master/images/screenshot2.png)
+![Screenshot](https://gitlab.com/berublan/vscode-log-viewer-gb2312/raw/master/images/screenshot2.png)

@@ -1,4 +1,4 @@
-image: registry.gitlab.com/berublan/vscode-log-viewer
+image: registry.gitlab.com/berublan/vscode-log-viewer-gb2312
 
 cache:
   paths:

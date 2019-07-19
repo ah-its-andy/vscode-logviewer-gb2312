@@ -20,8 +20,8 @@ export function toLogUri(w: WatchForUri): vscode.Uri {
             tabTitle = tabTitle + ext;
         }
     } else {
-        // with .log-viewer it will pick our log highlighting
-        tabTitle = tabTitle + ".log-viewer";
+        // with .log-viewer-gb2312 it will pick our log highlighting
+        tabTitle = tabTitle + ".log-viewer-gb2312";
     }
 
     //"logviewer" will become the authority part

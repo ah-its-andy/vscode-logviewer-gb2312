@@ -18,7 +18,7 @@ Trace:
 
 npm manifest: 
   {
-      "name": "vscode-log-viewer",
+      "name": "vscode-log-viewer-gb2312",
       "displayName": "Log Viewer",
       "description": "Monitors text log files",
       "version": "0.9.0",
@@ -26,7 +26,7 @@ npm manifest:
       "license": "MIT",
       "repository": {
           "type": "git",
-          "url": "https://gitlab.com/berublan/vscode-log-viewer"
+          "url": "https://gitlab.com/berublan/vscode-log-viewer-gb2312"
       },
       "engines": {
           "vscode": "^1.36.0"
@@ -47,7 +47,7 @@ npm manifest:
       "main": "./dist/extension",
       "contributes": {
           "views": {
-              "log-viewer": [
+              "log-viewer-gb2312": [
                   {
                       "id": "logExplorer",
                       "name": "Watches"
@@ -72,7 +72,7 @@ npm manifest:
           "viewsContainers": {
               "activitybar": [
                   {
-                      "id": "log-viewer",
+                      "id": "log-viewer-gb2312",
                       "title": "Log Viewer",
                       "icon": "images/baseline-broken_image-24px.svg"
                   }
@@ -308,12 +308,12 @@ npm manifest:
           },
           "languages": [
               {
-                  "id": "log-viewer",
+                  "id": "log-viewer-gb2312",
                   "aliases": [
                       "Log file"
                   ],
                   "extensions": [
-                      ".log-viewer"
+                      ".log-viewer-gb2312"
                   ],
                   "mimetypes": [
                       "log",
@@ -326,8 +326,8 @@ npm manifest:
           ],
           "grammars": [
               {
-                  "language": "log-viewer",
-                  "scopeName": "text.log.log-viewer",
+                  "language": "log-viewer-gb2312",
+                  "scopeName": "text.log.log-viewer-gb2312",
                   "path": "./syntaxes/log-syntax.json"
               }
           ]

@@ -18,8 +18,8 @@ script_dir: str = path.dirname(path.realpath(sys.argv[0]))
 
 os.chdir(script_dir)
 
-tag = "log-viewer-docker:latest"
-registry = "registry.gitlab.com/berublan/vscode-log-viewer"
+tag = "log-viewer-gb2312-docker:latest"
+registry = "registry.gitlab.com/berublan/vscode-log-viewer-gb2312"
 
 if args.build:
     subprocess.run(["docker", "build", "-t", tag, "."])

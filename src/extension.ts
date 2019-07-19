@@ -18,7 +18,7 @@ import { registerInstance } from "./common/container";
 export function activate(context: vscode.ExtensionContext) {
     // HACK
     const extDirName = path.basename(context.extensionPath);
-    if (extDirName === "log-viewer" || extDirName === "vscode-log-viewer") {
+    if (extDirName === "log-viewer-gb2312" || extDirName === "vscode-log-viewer-gb2312") {
         setDevEnv(true);
     } else {
         setDevEnv(false);

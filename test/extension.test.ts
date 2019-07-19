@@ -39,9 +39,9 @@ suite("logUri", () => {
 
         const testCases: Array<{ input: string, expected: string }> = [
             { input: "/foo/bar/**/*.log", expected: ".log" },
-            { input: "/foo/bar{1,3}/**/*.log*", expected: ".log-viewer" },
-            { input: "/foo/bar/**/*asd*txt", expected: ".log-viewer" },
-            { input: "/foo/bar/**/*asd*txt.", expected: ".log-viewer" },
+            { input: "/foo/bar{1,3}/**/*.log*", expected: ".log-viewer-gb2312" },
+            { input: "/foo/bar/**/*asd*txt", expected: ".log-viewer-gb2312" },
+            { input: "/foo/bar/**/*asd*txt.", expected: ".log-viewer-gb2312" },
             { input: "/foo/(bar|baz)/**/*asd*.txt", expected: ".txt" },
             { input: "/foo/bar/**/*a[a]sd*.xml", expected: ".xml" },
         ];
@@ -74,7 +74,7 @@ suite("FsWalker", () => {
         const patterns = [
             "**/*.d.ts",
             // this doesn't work in rg, is it a bug?
-            // cli: rg /home/berni/Documentos/src/log-viewer/node_modules --no-ignore --hidden --files --glob '*/*.json'
+            // cli: rg /home/berni/Documentos/src/log-viewer-gb2312/node_modules --no-ignore --hidden --files --glob '*/*.json'
             "*/*.json",
             "**/*.xlsx",
         ];

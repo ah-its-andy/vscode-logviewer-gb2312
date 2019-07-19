@@ -89,7 +89,7 @@
     },
     "type": "object",
     "properties": {
-        "logViewer.watch": {
+        "logViewer-gb2312.watch": {
             "type": "array",
             "items": {
                 "$ref": "#/definitions/watch"
