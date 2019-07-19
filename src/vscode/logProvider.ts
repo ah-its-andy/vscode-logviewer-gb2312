@@ -5,6 +5,7 @@ import { fromLogUri } from "./logUri";
 import { ConfigService } from "./config";
 import { NodeStringDecoder, StringDecoder } from "string_decoder";
 import { getInstace } from "../common/container";
+import { IConvDecoder } from "./iconvDecoder";
 
 let TheBuffer: Buffer | undefined;
 
@@ -56,6 +57,10 @@ async function lastChunk(
 
 const _decoders: { [encoding: string]: NodeStringDecoder | undefined } = {};
 function getDecoder(encoding: string): NodeStringDecoder {
+    if(encoding == 'gb2312'){
+        return new IConvDecoder(encoding)
+    }
+    
     let decoder = _decoders[encoding];
     if (decoder) {
         // clear internal buffer
