@@ -3,7 +3,7 @@
     "displayName": "Log Viewer GB2312",
     "description": "Fork from vscode-log-viewer-gb2312. Add encoding gb2312 support.",
     "version": "0.9.1",
-    "publisher": "andy",
+    "publisher": "AndyCui",
     "license": "MIT",
     "repository": {
         "type": "git",
